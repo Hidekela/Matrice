@@ -164,3 +164,33 @@ bool est_MatriceDiagonale(matrice *M)
 {
     return est_MatriceTriangulaireSup(M) && est_MatriceTriangulaireInf(M);
 }
+
+/**
+ * @brief Teste si la matrice a un déterminant
+ * 
+ * @param M la matrice
+ * @return true si elle en a
+ * @return false sinon
+ */
+bool avoir_determinantMatrice(matrice *M)
+{
+    return est_MatriceCarree(M);
+}
+
+/**
+ * @brief Teste si la matrice est inversible (au sens carrée pour l'instant)
+ * 
+ * @param M la matrice
+ * @return true si elle l'est
+ * @return false sinon
+ */
+bool est_MatriceInversible(matrice *M)
+{
+    CORPS det = 0;
+    if(!avoir_determinantMatrice(M))
+    {
+        return false;
+    }
+    matriceDeterminant(M,&det);
+    return det != 0;
+}
