@@ -14,6 +14,6 @@ bool est_MatriceTriangulaireInf(matrice *M);
 bool est_MatriceTriangulaire(matrice *M);
 bool est_MatriceDiagonale(matrice *M);
 bool avoir_determinantMatrice(matrice *M);
-bool est_MatriceInversible(matrice *M);
+bool est_MatriceCarreeInversible(matrice *M);
 
 #endif // TESTESMATRICES_H_INCLUDED

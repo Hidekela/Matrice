@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "testesMatrices.h"
 
 /**
@@ -178,19 +179,37 @@ bool avoir_determinantMatrice(matrice *M)
 }
 
 /**
- * @brief Teste si la matrice est inversible (au sens carrée pour l'instant)
+ * @brief Teste si la matrice est inversible (pour les matrices carrées)
  * 
  * @param M la matrice
  * @return true si elle l'est
  * @return false sinon
  */
-bool est_MatriceInversible(matrice *M)
+bool est_MatriceCarreeInversible(matrice *M)
 {
-    CORPS det = 0;
-    if(!avoir_determinantMatrice(M))
+    if(!est_MatriceCarree(M))
     {
+        puts("Erreur: La matrice testee n'est pas carree!");
         return false;
     }
-    matriceDeterminant(M,&det);
-    return det != 0;
+
+    matrice *E = NULL;
+    
+    if(!est_MatriceTriangulaireSup(M))
+    {
+        E = creerMatrice(M->ligne,M->colonne);
+        matriceEchelonner(E,M);
+    }
+    else
+        E = M;
+    
+    if(E->coefficient[E->ligne-1][E->colonne-1] != 0)
+    {
+        if(E!=M) detruireMatrice(E);
+        return true;
+    }
+    
+    if(E!=M) detruireMatrice(E);
+
+    return false;
 }
