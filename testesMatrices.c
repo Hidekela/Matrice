@@ -179,17 +179,16 @@ bool avoir_determinantMatrice(matrice *M)
 }
 
 /**
- * @brief Teste si la matrice est inversible (pour les matrices carrées)
+ * @brief Teste si la matrice est inversible (admet une inverse à gauche et à droite)
  * 
  * @param M la matrice
  * @return true si elle l'est
  * @return false sinon
  */
-bool est_MatriceCarreeInversible(matrice *M)
+bool est_MatriceInversible(matrice *M)
 {
     if(!est_MatriceCarree(M))
     {
-        puts("Erreur: La matrice testee n'est pas carree!");
         return false;
     }
 
@@ -207,6 +206,80 @@ bool est_MatriceCarreeInversible(matrice *M)
     {
         if(E!=M) detruireMatrice(E);
         return true;
+    }
+    
+    if(E!=M) detruireMatrice(E);
+
+    return false;
+}
+
+/**
+ * @brief Teste si une matrice est inversible à gauche
+ * 
+ * @param M la matrice
+ * @return true si elle l'est
+ * @return false sinon
+ */
+bool est_MatriceInversibleaGauche(matrice *M)
+{
+    if(M->ligne < M->colonne)
+    {
+        return false;
+    }
+
+    matrice *E = NULL;
+    
+    if(!est_MatriceTriangulaireSup(M))
+    {
+        E = creerMatrice(M->ligne,M->colonne);
+        matriceEchelonner(E,M);
+    }
+    else
+        E = M;
+    
+    if(E->coefficient[E->colonne-1][E->colonne-1] != 0)
+    {
+        if(E!=M) detruireMatrice(E);
+        return true;
+    }
+    
+    if(E!=M) detruireMatrice(E);
+
+    return false;
+}
+
+/**
+ * @brief Teste si une matrice est inversible à droite
+ * 
+ * @param M la matrice
+ * @return true si elle l'est
+ * @return false sinon
+ */
+bool est_MatriceInversibleaDroite(matrice *M)
+{
+    if(M->ligne > M->colonne)
+    {
+        return false;
+    }
+
+    matrice *E = NULL;
+    int i;
+    
+    if(!est_MatriceTriangulaireSup(M))
+    {
+        E = creerMatrice(M->ligne,M->colonne);
+        matriceEchelonner(E,M);
+    }
+    else
+        E = M;
+    
+    for(i = E->ligne-1; i < E->colonne; i++)
+    {
+        if(E->coefficient[E->ligne-1][i] != 0)
+        {
+            if(E!=M) detruireMatrice(E);
+            return true;
+        }
     }
     
     if(E!=M) detruireMatrice(E);
