@@ -2,7 +2,7 @@
 #include "operationsElementaires.h"
 
 /**
- * @brief Echange deux lignes d'une matrice (et change le signe de l'un de la ligne)
+ * @brief Echange deux lignes d'une matrice
  * 
  * @param M la matrice
  * @param l1 la ligne
@@ -17,7 +17,7 @@ void echangeLigne(matrice *M, int l1, int l2)
     {
         temp = M->coefficient[l1][j];
         M->coefficient[l1][j] = M->coefficient[l2][j];
-        M->coefficient[l2][j] = temp == 0.0? temp : -temp; // Pour enlever le "-" du 0 (-0.000000) :|
+        M->coefficient[l2][j] = temp;
     }
 }
 
@@ -36,6 +36,7 @@ void eliminationSurLigne(matrice *M, int i, int k)
     else if(M->coefficient[k][k] == 0)
     {
         echangeLigne(M,k,i);
+        produitScalaireLigne(M,-1,i);
         return;
     }
 
