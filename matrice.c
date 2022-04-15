@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "matrice.h"
+#include "fonctions.h"
 
 /**
  * @brief Arrête le programme en cas d'erreur d'allocation de mémoire
@@ -114,5 +115,23 @@ void saisieMatrice(matrice *M)
             fgets(a,16,stdin);
             M->coefficient[i][j] = strtod(a,NULL);
         }
+    }
+}
+
+/**
+ * @brief Saisie un vecteur ligne (les coefficients) d'une matrice, les coefficients étant séparés par 
+ * un caractère spécifié "splitter"
+ * 
+ * @param M la matrice à saisir
+ * @param splitter le séparateur des coefficients (ex: ' ', ',', ...)
+ */
+void saisieMatriceParLigne(matrice *M, char splitter)
+{
+    int i;
+    puts("\n");
+
+    for(i = 0; i < M->ligne; i++)
+    {
+        scanSplitDoubles(M->coefficient[i],M->colonne,splitter);
     }
 }

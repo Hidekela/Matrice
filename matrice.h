@@ -15,6 +15,7 @@ matrice* creerMatrice(int ligne, int colonne);
 void detruireMatrice(matrice *M);
 void afficheMatrice(matrice *M);
 void saisieMatrice(matrice *M);
+void saisieMatriceParLigne(matrice *M, char splitter);
 
 #include "testesMatrices.h"
 #include "operationsMatrices.h"
