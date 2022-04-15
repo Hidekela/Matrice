@@ -69,3 +69,25 @@ void combinaisonParAutreLigne(matrice *M, CORPS lambda, int l, int lc)
         M->coefficient[l][j] += lambda * M->coefficient[lc][j];
     }
 }
+
+/**
+ * @brief Multiplie une ligne d'une matrice par un scalaire non nul
+ * 
+ * @param M la matrice
+ * @param lambda le scalaire
+ * @param l la ligne
+ */
+void produitScalaireLigne(matrice *M, CORPS lambda, int l)
+{
+    if(lambda == 0)
+    {
+        puts("Erreur: lambda doit etre non nul!");
+        return;
+    }
+
+    int j;
+    for(j = 0; j < M->colonne; j++)
+    {
+        M->coefficient[l][j] *= lambda;
+    }
+}
