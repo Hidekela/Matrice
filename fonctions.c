@@ -19,12 +19,16 @@ void scanSplitDoubles(double *tableau, int taille, char splitter)
     fgets(text,255,stdin);
     start = text;
 
+    while (*start == splitter)
+        start++;
+
     for(i = 0; i < taille; i++)
     {
         tableau[i] = strtod(start,NULL);
         start = strchr(start,splitter);
         if(start != NULL)
-            start++;
+            while (*start == splitter)
+                start++;
         else
             break;
     }
