@@ -13,5 +13,6 @@ void matricesProduit(matrice *M_fois_N, matrice *M, matrice *N);
 void matricePuissance(matrice *M_exp_n, matrice *M, int n);
 void matriceEchelonner(matrice *M_echelonnee, matrice *M);
 bool matriceDeterminant(matrice *M, CORPS *det);
+void matriceInverse(matrice *M_inverse, matrice *M);
 
 #endif // OPERATIONSMATRICES_H_INCLUDED

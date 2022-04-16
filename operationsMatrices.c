@@ -258,3 +258,88 @@ bool matriceDeterminant(matrice *M, CORPS *det)
 
     return true;
 }
+
+/**
+ * @brief Inverse une matrice carrée
+ * 
+ * @param M_inverse la matrice qui recevra la matrice inverse
+ * @param M la matrice à inverser
+ */
+void matriceInverse(matrice *M_inverse, matrice *M) // Echelonnage réduite à I, voir livre-algebre-1.pdf de exo7.emath.fr, p112-115
+{
+    if(!est_MatriceInversible(M))
+    {
+        puts("Erreur: la matrice n'est pas inversible!");
+        return;
+    }
+    if(!sont_MatricesMemeTaille(M_inverse,M))
+    {
+        puts("Erreur: la matrice qui recoit et la matrice a inverser n'ont pas la meme taille!");
+        return;
+    }
+
+    matrice *I = NULL;
+    I = creerMatrice(M->ligne,M->colonne);
+    matriceIdentite(M_inverse);
+
+    matriceCopier(M,I);
+
+    int i,j;
+    CORPS lambda;
+
+    // Echelonnage
+    for(i = 0; i < I->ligne; i++)
+    {
+        for(j = 0; j < I->colonne; j++)
+        {
+            if(i > j && I->coefficient[i][j] != 0)
+            {
+                if(I->coefficient[j][j] == 0)
+                {
+                    echangeLigne(I,j,i);
+                    echangeLigne(M_inverse,j,i);
+                }
+                else
+                {
+                    lambda = -I->coefficient[i][j] / I->coefficient[j][j];
+                    combinaisonParAutreLigne(I,lambda,i,j);
+                    combinaisonParAutreLigne(M_inverse,lambda,i,j);
+                }
+            }
+        }
+    }
+
+    // Echelonnage réduite
+
+        //Homotéties
+    for(i = 0; i < I->ligne; i++)
+    {
+        lambda = 1 / I->coefficient[i][i];
+        produitScalaireLigne(I,lambda,i);
+        produitScalaireLigne(M_inverse,lambda,i);
+    }
+
+        //Eliminations
+    for(i = I->ligne-1; i >= 0; i--)
+    {
+        for(j = I->colonne-1; j >= 0; j--)
+        {
+            if(i < j && I->coefficient[i][j] != 0)
+            {
+                if(I->coefficient[j][j] == 0)
+                {
+                    echangeLigne(I,j,i);
+                    echangeLigne(M_inverse,j,i);
+                }
+                else
+                {
+                    lambda = -1;
+                    combinaisonParAutreLigne(I,lambda,i,j);
+                    combinaisonParAutreLigne(M_inverse,lambda,i,j);
+                }
+            }
+        }
+    }
+    
+    detruireMatrice(I);
+}
