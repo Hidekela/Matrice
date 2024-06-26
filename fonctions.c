@@ -32,7 +32,7 @@ void scanSplitDoubles(double *tableau, int taille, char splitter)
         else
             break;
     }
-    for(i++; i < taille; i++)
+    for(i = 0; i < taille; i++)
     {
         tableau[i] = 0.0;
     }

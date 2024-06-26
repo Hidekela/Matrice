@@ -104,7 +104,7 @@ void matricesAddition(matrice *M_plus_N, matrice *M, matrice *N)
  * @param scalaire le scalaire
  * @param M la matrice
  */
-void matricesProduitParScalaire(CORPS scalaire, matrice *M)
+void matriceProduitParScalaire(CORPS scalaire, matrice *M)
 {
     int i,j;
 
