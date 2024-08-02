@@ -14,5 +14,6 @@ void matricePuissance(matrice *M_exp_n, matrice *M, int n);
 void matriceEchelonner(matrice *M_echelonnee, matrice *M);
 bool matriceDeterminant(matrice *M, CORPS *det);
 void matriceInverse(matrice *M_inverse, matrice *M);
+int matriceRang(matrice *M);
 
 #endif // OPERATIONSMATRICES_H_INCLUDED
