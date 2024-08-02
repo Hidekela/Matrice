@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "fonctions.h"
@@ -32,7 +32,7 @@ void scanSplitDoubles(double *tableau, int taille, char splitter)
         else
             break;
     }
-    for(i = 0; i < taille; i++)
+    for(i++; i < taille; i++)
     {
         tableau[i] = 0.0;
     }
