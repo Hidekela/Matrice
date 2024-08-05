@@ -344,10 +344,18 @@ void matriceInverse(matrice *M_inverse, matrice *M) // Echelonnage réduite à I
     detruireMatrice(I);
 }
 
+/**
+ * @brief Donne le rang d'une matrice
+ * 
+ * @param M la matrice 
+ * @return int le rang de la matrice
+ */
 int matriceRang(matrice *M)
 {
     int rang = 0;
     matrice *ME = NULL;
+
+    ME = creerMatrice(M->ligne, M->colonne);
     matriceEchelonner(ME,M);
 
     for(int i = 0; i < ME->ligne; i++)
@@ -361,6 +369,8 @@ int matriceRang(matrice *M)
             }
         }
     }
+
+    detruireMatrice(ME);
     return rang;
 }
 
