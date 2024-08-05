@@ -15,5 +15,6 @@ void matriceEchelonner(matrice *M_echelonnee, matrice *M);
 bool matriceDeterminant(matrice *M, CORPS *det);
 void matriceInverse(matrice *M_inverse, matrice *M);
 int matriceRang(matrice *M);
+void matriceExtraite(matrice *M, int ligne_debut, int ligne_fin, int colonne_debut, int colonne_fin, matrice *E);
 
 #endif // OPERATIONSMATRICES_H_INCLUDED

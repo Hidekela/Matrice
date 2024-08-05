@@ -363,3 +363,32 @@ int matriceRang(matrice *M)
     }
     return rang;
 }
+
+/**
+ * @brief Extrait une sous-matrice d'une matrice avec les lignes et colonnes limites spécifiées
+ * 
+ * @param M la matrice contenant la sous-matrice à extraire
+ * @param ligne_debut l'index de la ligne de la matrice sur laquelle debute l'extraction
+ * @param ligne_fin l'index de la dernière ligne d'extraction de la matrice
+ * @param colonne_debut l'index de la colonne de la matrice sur laquelle debute l'extraction
+ * @param colonne_fin l'index de la dernière colonne d'extraction de la matrice
+ * @param E la matrice qui recevra la sous-matrice extraite
+ */
+void matriceExtraite(matrice *M, int ligne_debut, int ligne_fin, int colonne_debut, int colonne_fin, matrice *E)
+{
+    int i, j;
+
+    if(M->ligne < E->ligne || M->colonne < E->colonne || E->ligne != ligne_fin - ligne_debut + 1 || E->colonne != colonne_fin - colonne_debut + 1)
+    {
+        puts("Erreur: nombre de lignes ou de colonnes invalides!");
+        return;
+    }
+
+    for(i = 0; i < E->ligne; i++)
+    {
+        for(j = 0; j < E->colonne; j++)
+        {
+            E->coefficient[i][j] = M->coefficient[ligne_debut + i][colonne_debut + j];
+        }
+    }
+}
